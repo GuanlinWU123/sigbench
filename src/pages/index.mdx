@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: Research Project Page Template
+title: >-
+    Towards Physics-informed Visual-Spatial Intelligence with Human Priors: An Autonomous Driving Study
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 favicon: favicon.svg
 thumbnail: screenshot-light.png
@@ -33,35 +34,39 @@ export const components = {pre: CodeBlock, table: Table}
   title={frontmatter.title}
   authors={[
     {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "Independent",
-      notes: ["*", "†"],
+      name: "Guanlin Wu",
+      url: "https://guanlinwu123.github.io",
+      notes: ["*"],
     },
     {
-      name: "Author Two",
-      institution: "Institution Two",
-      notes: ["*", "†"],
+      name: "Boyan Su",
+      notes: ["*"],
     },
     {
-      name: "Author Three",
-      institution: "Institution Three",
+      name: "Yang Zhao",
+    },
+    {
+      name: "Pu Wang",
+    },
+    {
+      name: "Yichen Lin",
+    },
+    {
+      name: "Hao Frank Yang",
+      url: "http://haofrankyang.net",
       notes: ["†"],
-    },
-    {
-      name: "Author Four",
-      institution: "Institution Four",
-    },
+    }
   ]}
-  conference="Conference Name"
+  conference="NeurIPS 2025 (Spotlight)"
+  institution="Johns Hopkins University"
   notes={[
     {
       symbol: "*",
-      text: "author note one",
+      text: "Equal Contribution",
     },
     {
       symbol: "†",
-      text: "author note two",
+      text: "Corresponding Author",
     },
   ]}
   links={[
