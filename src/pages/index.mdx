@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
 title: >-
-    Towards Physics-informed Visual-Spatial Intelligence with Human Priors: An Autonomous Driving Study
+    Towards Physics-informed Spatial Intelligence with Human Priors: An Autonomous Driving Pilot Study
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 favicon: favicon.svg
 thumbnail: screenshot-light.png
@@ -28,6 +28,10 @@ import dogsTrue from "../assets/dogs-true.png"
 import benchmark_overview from "../assets/benchmark_overview.png"
 import evaluation_metrics from "../assets/evaluation_metrics.png"
 import annotation_pipeline from "../assets/annotation_pipeline.png"
+import zs_results_grid from "../assets/zs_results_grid.png"
+import icl_results_grid from "../assets/icl_results_grid.png"
+import icl_vis_grid from "../assets/icl_vis_grid.png"
+import human_like_results from "../assets/human_like_results.png"
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
@@ -48,9 +52,11 @@ export const components = {pre: CodeBlock, table: Table}
     },
     {
       name: "Yang Zhao",
+      url: "https://www.linkedin.com/in/yang-zhao-b60b70273/",
     },
     {
       name: "Pu Wang",
+      url: "https://www.linkedin.com/in/pu-wang-662a59300/",
     },
     {
       name: "Yichen Lin",
@@ -122,16 +128,38 @@ Based on SIG, we can extract a directed spatial relation graph (SRG) that descri
   <span slot="caption">Illustration Examples of MLSM and SRGS. At the start of both MLSM and SRGS, it will match the objects between the predicted and GT SIG using bipartite matching. For MLSM, we provide example for calculating TP, FP and FN for vehicles in the boxed area in upper part. For SRGS, we highlight the node and edge needed to insert and substitute and their total edit distance in lower part.</span>
 </Figure>
 
-### SIGBench Annotation Pipeline
+## SIGBench Dataset
+We introduce SIGBench, a benchmark for quantifying both grid-based and human-like VSI in MLLMs within AD scenario. SIGBench comprises 1,423 frames, each annotated with (i) SIG and human-like SIG, (ii) SRP and human-like SRP and (iii) a gaze attention map in image size. SIGBench contains two main task clusters: grid-based VSI tasks: spatial intelligence grid creation (SIGC) and spatial relation paragraph filling (SRPF) and human-like VSI tasks: human-like SIGC and SRPF, and gaze prediction.
 <Figure>
   <Image slot="figure" source={annotation_pipeline} altText="annotation_pipeline." />
-  <span slot="caption">The annotation pipeline of SIGBench.</span>
+  <span slot="caption">(a) is the annotation pipeline of SIGBench and (b) illustrates the SIGC and SRPF tasks in SIGBench.</span>
 </Figure>
 
+## Experiment
+We evaluate several top-tier MLLMs on SIGBench mainly from five modal families: 1) open-source models such as InternVL and Qwen-VL; 2) Proprietary models including OpenAI GPT, Google Gemini and Anthropic Claude. We conduct both SIG-based and MC(VQA)-based In-context Learning (ICL) on GPT-4o and Gemini-2.5-Pro.
+### Results of Zero-shot Inference on SIGBench for Grid-based VSI tasks
+<Figure>
+  <Image slot="figure" source={zs_results_grid} altText="annotation_pipeline." />
+  <span slot="caption">Quantitative comparison of different MLLMs on SIGBench for general VSI tasks. P, R, F1, and AssA means precision, recall, F1-score and Association Accuracy, respectively. S and WS means graph similarity and weighted graph similarity. Acc means accuracy. Dark blue and light blue indicates the best and the second best result among all models.</span>
+</Figure>
 
-## Results
+### Results of SIG-based ICL using Random Sample Selection
+<Figure>
+  <Image slot="figure" source={icl_results_grid} altText="annotation_pipeline." />
+  <span slot="caption">Quantitative comparison of 3-shot ICL for general VSI tasks on SIGBench-tiny. Z-S means zero-shot, ICL-MC meaning ICL using multiple-choice VQA and ICL-SIG meaning ICL using SIG. light red indicates the results that is worse than zero-shot after applying ICL on GPT-4o and Gemini-2.5-Pro.</span>
+</Figure>
 
+### Visualization of Grid-based VSI tasks Results
+<Figure>
+  <Image slot="figure" source={icl_vis_grid} altText="annotation_pipeline." />
+  <span slot="caption">Visualization of SIG-empowered VSI results. SRD-Dir and SRD-Prox denotes the Acc in SRD (Directional) and SRF (Proximal). (a) demonstrate the performance of human and different models in grid-based tasks on SIGBench. Even for leading MLLMs, there is a substantial gap compared to human performance in VSI. (b) and (c) denotes the ICL results of GPT-4o and Gemini-2.5-pro on SIGBench-tiny. ICL-SIG outperforms the zero-shot baseline in all VSI metrics and delivers more general improvements than ICL-MC.</span>
+</Figure>
 
+### Results of Zero-shot Inference on SIGBench for Human-Like VSI tasks
+<Figure>
+  <Image slot="figure" source={human_like_results} altText="annotation_pipeline." />
+  <span slot="caption">Quantitative comparison of different MLLMs on SIGBench dataset for human-like visual-spatial intelligence tasks. H means human-like and KL-D means KL-Divergence.</span>
+</Figure>
 
 {/* ## Image comparison slider
 
@@ -189,10 +217,10 @@ You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.g
 ## BibTeX citation
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@inproceedings{wu2025towards,
+  title = {Towards Physics-informed Spatial Intelligence with Human Priors: An Autonomous Driving Pilot Study},
+  author = {Guanlin Wu, Boyan Su, Yang Zhao, Pu Wang, Yichen Lin, Hao Frank Yang},
+  booktitle={NeurIPS},
+  year = "2025"
 }
 ```
