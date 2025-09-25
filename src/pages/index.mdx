@@ -25,6 +25,9 @@ import Splat from "../components/Splat.tsx"
 import dogsDiffc from "../assets/dogs-diffc.png"
 import dogsTrue from "../assets/dogs-true.png"
 
+import benchmark_overview from "../assets/benchmark_overview.png"
+import evaluation_metrics from "../assets/evaluation_metrics.png"
+import annotation_pipeline from "../assets/annotation_pipeline.png"
 
 import CodeBlock from "../components/CodeBlock.astro";
 import Table from "../components/Table.astro";
@@ -40,6 +43,7 @@ export const components = {pre: CodeBlock, table: Table}
     },
     {
       name: "Boyan Su",
+      url: "https://www.linkedin.com/in/boyan-su-03978126a/",
       notes: ["*"],
     },
     {
@@ -86,33 +90,50 @@ export const components = {pre: CodeBlock, table: Table}
       icon: "academicons:arxiv",
     },
     {
-      name: "Bluesky",
-      url: "",
-      icon: "ri:bluesky-line"
+      name: "Hugging Face",
+      url: "https://huggingface.co/datasets/Frank0930/SIGBench",
+      icon: "simple-icons:huggingface"
     }
   ]}
   />
 
-<Video source={outside} />
+{/* <Video source={outside} /> */}
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+How to encode visual-spatial intelligence (VSI) into representative and informative features remains an open challenge. Instead of representing VSI through Visual Question Answering (VQA)-style solely, we introduce spatial intelligence grid (SIG): a structured, grid-based data schema that embeds geometrical spatial relationship among objects along with physical priors in human world, as a complementary representation. We further derive a set of SIG-informed evaluation metrics that rigorously quantify a model’s true VSI capabilities. In few-shot in-context learning experiments on state-of-the-art multimodal LLMs (e.g. GPT-4o, Gemini-2.5-Pro), SIG yields consistently larger, more stable, and more comprehensive improvements across all VSI metrics compared to VQA-style representations, demonstrating its potential as a novel data schema for learning VSI. Based on SIG, we create SIGBench, a benchmark containing 1.4K driving frames annotated with ground-truth SIG labels and human gaze attention, supporting both grid-based machine VSI tasks and human-like attention-driven VSI tasks in autonomous-driving scenarios.
 
 </HighlightedSection>
 
-## Figures
-
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
+## Highlight
 
 <Figure>
-  <Image slot="figure" source={transformer} altText="Diagram of the transformer deep learning architecture." />
-  <span slot="caption">Diagram of the transformer deep learning architecture.</span>
+  <Image slot="figure" source={benchmark_overview} altText="benchmark_overview." />
+  <span slot="caption">Overview of Human-like SIG in AD Scenario. In the left, we use SIG to represent the spatial relation of traffic sign, traffic lights, vehicles and self (ego-vehicle) in the image. We apply homographic transformation to convert human gaze attention from image to SIG size in the right. Combining them, we get human-like SIG, which can then be extracted to human-like SRG and SRP in middle part. The order denotes the rank of an object of the same category in the image from left to right (e.g. black truck 1 is the left-most object among vehicles).</span>
 </Figure>
 
-## Image comparison slider
+### Evaluation Metrics
+Based on SIG, we can extract a directed spatial relation graph (SRG) that describes the spatial relation (direction+distance in grid) of each object and spatial relation paragraph (SRP) that describes spatial relation of each object within a text manner. To quantitatively assess the a model’s VSI, we propose three novel evaluation metrics: Multi-level spatial matching (MLSM), spatial relation graph similarity (SRGS) and semantic relational distance (SRD). MLSM compares object positions directly within the SIG representation, capturing absolute localization accuracy. SRGS measures both node-wise and edge-wise correspondence between predicted and ground-truth (GT) SRG, emphasizing relation classification and structure. SRD computes a semantic relational distance between predicted and ground-truth prepositions in SRP, evaluating the fidelity of both directional and proximal relations.
+
+<Figure>
+  <Image slot="figure" source={evaluation_metrics} altText="evaluation_metrics." />
+  <span slot="caption">Illustration Examples of MLSM and SRGS. At the start of both MLSM and SRGS, it will match the objects between the predicted and GT SIG using bipartite matching. For MLSM, we provide example for calculating TP, FP and FN for vehicles in the boxed area in upper part. For SRGS, we highlight the node and edge needed to insert and substitute and their total edit distance in lower part.</span>
+</Figure>
+
+### SIGBench Annotation Pipeline
+<Figure>
+  <Image slot="figure" source={annotation_pipeline} altText="annotation_pipeline." />
+  <span slot="caption">The annotation pipeline of SIGBench.</span>
+</Figure>
+
+
+## Results
+
+
+
+{/* ## Image comparison slider
 
 An interactive, accessible slider component with keyboard navigation.
 <Figure>
@@ -163,6 +184,7 @@ You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.g
 | RoBERTa-large | 0.92 | 0.91 | 7.2 |
 | DistilBERT | 0.86 | 0.84 | 2.1 |
 | XLNet | 0.90 | 0.89 | 6.8 |
+*/}
 
 ## BibTeX citation
 
