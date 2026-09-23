@@ -7,7 +7,7 @@ import Notes from "./Notes.astro";
 interface Props {
   title: string;
   authors: Author[];
-  conference?: string;
+  conference?: string | string[];
   notes?: Note[];
   links: Link[];
   institution?: string;
@@ -21,7 +21,13 @@ const { title, authors, institution, conference, notes, links } = Astro.props as
   <div class="flex flex-col gap-6 items-center">
     <Authors authors={authors} />
     {institution && <p class="text-center text-xl">{institution}</p>}
-    {conference && <p class="text-center text-xl font-semibold">{conference}</p>}
+    {conference && (
+      <p class="text-center text-xl font-semibold">
+        {(Array.isArray(conference) ? conference : [conference]).map((line) => (
+          <span class="block">{line}</span>
+        ))}
+      </p>
+    )}
     {notes && <Notes notes={notes} />}
     {links && <Links links={links} />}
   </div>
